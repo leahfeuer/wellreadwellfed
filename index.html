@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<htlm>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title>Leah's Review Aggregator</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+	<script type="text/javascript" charset="utf-8">
+
+
+
+		$(function (){
+
+			NYTIMES_URL = "http://www.nytimes.com/restaurants/search?keyword=";
+			NYMAG_URL = "http://nymag.com/search/search.cgi?Ns=Relevance%7C0&t=restaurant&tx=";
+			YELP_URL = "http://www.yelp.com/search?find_desc="
+			NEWYORKER_URL = "http://www.newyorker.com/search?&query="
+			var tables = "&subcategory=tables"
+			//var locyelp = "#find_loc="
+			$("#submit").on("click",function() {
+				query = $("#q").attr("value");
+				//location = $("#l").attr("value");
+				urlnytimes = NYTIMES_URL + query;
+				urlnymag = NYMAG_URL + query;
+				urlyelp = YELP_URL + query /*+ locyelp + location*/;
+				urlnewyorker = NEWYORKER_URL + query + tables;
+				window.open (urlnymag);
+				window.open (urlnytimes);
+				window.open (urlnewyorker);
+				window.yelpwindow = window.open (urlyelp);
+									/*yelpwindow.onload =
+									setTimeout (function () {
+									alert('yay');
+									yelpfirstlink = window.yelpwindow.document.getElementbyid('bizTitleLink0');
+									alert(yelpfirstlink.href);
+					}, 10000)*/
+
+				return false;
+			})
+		})
+</script>
+</head>
+<body>
+	<form action="" method="get" accept-charset="utf-8">
+		Restaurant Name <input type="text" name="q" value="" id="q">
+		<br> Location <input type="text" name="l" value="" id="l"> <br />
+		<input type="submit" id="submit" value="Search!">
+	</form>
+</body>
+</html>
