@@ -2,7 +2,7 @@
 <htlm>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<title>Leah's Review Aggregator</title>
+	<title>Well Read, Well Fed</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 
 	<script type="text/javascript" charset="utf-8">
@@ -14,7 +14,7 @@
 			NYTIMES_URL = "http://www.nytimes.com/restaurants/search?keyword=";
 			NYMAG_URL = "http://nymag.com/search/search.cgi?Ns=Relevance%7C0&t=restaurant&tx=";
 			YELP_URL = "http://www.yelp.com/search?find_desc="
-			NEWYORKER_URL = "http://www.newyorker.com/search?&query="
+			//NEWYORKER_URL = "http://www.newyorker.com/search?&query="
 			var tables = "&subcategory=tables"
 			//var locyelp = "#find_loc="
 			$("#submit").on("click",function() {
@@ -23,10 +23,10 @@
 				urlnytimes = NYTIMES_URL + query;
 				urlnymag = NYMAG_URL + query;
 				urlyelp = YELP_URL + query /*+ locyelp + location*/;
-				urlnewyorker = NEWYORKER_URL + query + tables;
+				//urlnewyorker = NEWYORKER_URL + query + tables;
 				window.open (urlnymag);
 				window.open (urlnytimes);
-				window.open (urlnewyorker);
+				//window.open (urlnewyorker);
 				window.yelpwindow = window.open (urlyelp);
 									/*yelpwindow.onload =
 									setTimeout (function () {
@@ -39,12 +39,91 @@
 			})
 		})
 </script>
+<style type="text/css">
+body
+{
+	background-color:#FF9966;
+}
+
+h1 {
+	color:#666666;
+	text-align:center;
+	font-size:42px;
+	position:relative;
+	top:30px;
+	}
+form {
+	color:#666666;
+	display:block;
+	width:350px;
+	margin:auto;
+	position:relative;
+	top:50px;
+	font-size:20px;
+	}
+label {
+	display:block;
+	float:left;
+	width:175px;
+	text-align:right;
+	margin-right:10px;
+	;
+}
+.submit
+{
+	//color: #000;
+	margin-left: 185px;
+	//background:#FFCC99;
+	//border: 2px outset #FFCC99;
+}
+.submit input
+{
+	
+}
+
+p.white {color:white}
+body.sansserif{font-family:"Myriad Pro",sans-serif;}
+body.center{text-align:center}
+div
+{
+	width:100%;
+	height:200px;
+	background-color:#666666;
+	position:absolute;
+	left:0;
+	bottom:0px;
+	/* Firefox*/
+	display:-moz-box;
+	-moz-box-orient:horizontal;
+	-moz-box-pack:center;
+	-moz-box-align:center;
+	
+	/*Safari and Chrome */
+	display:-webkit-box;
+	-webkit-box-orient:horizontal;
+	-webkit-box-pack:center;
+	-webkit-box-align:center;
+
+}
+</style>
 </head>
-<body>
-	<form action="" method="get" accept-charset="utf-8">
-		Restaurant Name <input type="text" name="q" value="" id="q">
-		<br> Location <input type="text" name="l" value="" id="l"> <br />
-		<input type="submit" id="submit" value="Search!">
-	</form>
+<body class="sansserif">	
+	<h1> Well Read, Well Fed </h1>
+		<form action="" method="get" accept-charset="utf-8">
+		
+		<p><label for="q">Restaurant Name </label>
+			<input type="text" name="q" value="" id="q">
+		</p>
+		<p><label for="l">Location</label>
+			<input type="text" name="l" value="" id="l"> 
+		</p>
+		<p class="submit">
+		<input type="submit" id="submit" value="Find Reviews!">
+		</P>
+	
+		</form>
+	<div>
+	<p class="white">Serving up a daily feast of reviews </p>
+	</div>
 </body>
 </html>
