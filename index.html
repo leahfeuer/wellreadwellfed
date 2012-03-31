@@ -69,19 +69,16 @@ label {
 	margin-right:10px;
 	;
 }
-.submit
+.button
 {
-	//color: #000;
+	color: #666666;
+	font-size:16px;
 	margin-left: 185px;
-	//background:#FFCC99;
-	//border: 2px outset #FFCC99;
-}
-.submit input
-{
-	
+	background:#FFCC99;
+	border: 2px solid #ffb777;
 }
 
-p.white {color:white}
+
 body.sansserif{font-family:"Myriad Pro",sans-serif;}
 body.center{text-align:center}
 div
@@ -92,6 +89,11 @@ div
 	position:absolute;
 	left:0;
 	bottom:0px;
+	line-height:200%;
+	text-align:center;
+	vertical-align:top;
+	color:white;
+	font-family:"Myriad Pro",sans-serif;
 	/* Firefox*/
 	display:-moz-box;
 	-moz-box-orient:horizontal;
@@ -108,7 +110,7 @@ div
 </style>
 </head>
 <body class="sansserif">	
-	<h1> Well Read, Well Fed </h1>
+	<h1> Well Read, Well Fed</h1>
 		<form action="" method="get" accept-charset="utf-8">
 		
 		<p><label for="q">Restaurant Name </label>
@@ -117,13 +119,16 @@ div
 		<p><label for="l">Location</label>
 			<input type="text" name="l" value="" id="l"> 
 		</p>
-		<p class="submit">
-		<input type="submit" id="submit" value="Find Reviews!">
-		</P>
+		<p>
+		<input type="submit" class="button" id="submit" value="Find Reviews!">
+		</p>
 	
 		</form>
-	<div>
-	<p class="white">Serving up a daily feast of reviews </p>
+	<div>	
+	<span style="font-size:28px">	Beta </span> <br />
+		Serving up a daily feast of reviews <br /> 
+		(only in Manhattan, for now) 
+		</span>
 	</div>
 </body>
 </html>
