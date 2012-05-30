@@ -12,19 +12,35 @@
 
 		$(function (){
 
+			//These variables store the first part of URLS used by each of the sites to search for a restaurant
+
 			NYTIMES_URL = "http://www.nytimes.com/restaurants/search?keyword=";
 			NYMAG_URL = "http://nymag.com/search/search.cgi?Ns=Relevance%7C0&t=restaurant&tx=";
-			YELP_URL = "http://www.yelp.com/search?find_desc="
-			//NEWYORKER_URL = "http://www.newyorker.com/search?&query="
-			var tables = "&subcategory=tables"
-			//var locyelp = "#find_loc="
+			YELP_URL = "http://www.yelp.com/search?find_desc=";
+			//NEWYORKER_URL = "http://www.newyorker.com/search?&query=";
+
+			/*These variables are  search paramters unique to each site.
+			Tables directs the search to the "Tables for Two" section of New Yorker.
+			Location adds the location search paramaters to Yelp.*/
+
+			var tables = "&subcategory=tables";
+			var locyelp = "&find_loc=";
+
+			// This describes what to do when the user clicks on the submit button
+
 			$("#submit").on("click",function() {
+
+				// Creates variables to store the inforation user types in the input boxes of the form
 				query = $("#q").attr("value");
-				//location = $("#l").attr("value");
+				locquery = $("#l").attr("value");
+
+				// Creates variables that are a combination of site url and user input
 				urlnytimes = NYTIMES_URL + query;
 				urlnymag = NYMAG_URL + query;
-				urlyelp = YELP_URL + query /*+ locyelp + location*/;
+				urlyelp = YELP_URL + query + locyelp + locquery;
 				//urlnewyorker = NEWYORKER_URL + query + tables;
+
+				//Opens the new URLS in new windows/tabs
 				window.open (urlnymag);
 				window.open (urlnytimes);
 				//window.open (urlnewyorker);
@@ -100,7 +116,7 @@ div
 	-moz-box-orient:horizontal;
 	-moz-box-pack:center;
 	-moz-box-align:center;
-	
+
 	/*Safari and Chrome */
 	display:-webkit-box;
 	-webkit-box-orient:horizontal;
@@ -123,25 +139,25 @@ div
 
 </script>
 </head>
-<body class="sansserif">	
+<body class="sansserif">
 	<h1> Well Read, Well Fed</h1>
 		<form action="" method="get" accept-charset="utf-8">
-		
+
 		<p><label for="q">Restaurant Name </label>
 			<input type="text" name="q" value="" id="q">
 		</p>
 		<p><label for="l">Location</label>
-			<input type="text" name="l" value="" id="l"> 
+			<input type="text" name="l" value="" id="l">
 		</p>
 		<p>
 		<input type="submit" class="button" id="submit" value="Find Reviews!">
 		</p>
-	
+
 		</form>
-	<div>	
+	<div>
 	<span style="font-size:28px">	Beta </span> <br />
-		Serving up a daily feast of reviews <br /> 
-		(only in Manhattan, for now) 
+		Serving up a daily feast of reviews <br />
+		(only in Manhattan, for now)
 		</span>
 	</div>
 </body>
