@@ -4,11 +4,10 @@
 
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 	<title>Well Read, Well Fed</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 
 	<script type="text/javascript" charset="utf-8">
-
-
 
 		$(function (){
 
@@ -24,7 +23,7 @@
 			Location adds the location search paramaters to Yelp.*/
 
 			var tables = "&subcategory=tables";
-			var locyelp = "&find_loc=";
+			var locyelp = "&find_loc=New+York%2C+NY";
 
 			// This describes what to do when the user clicks on the submit button
 
@@ -32,12 +31,12 @@
 
 				// Creates variables to store the inforation user types in the input boxes of the form
 				query = $("#q").attr("value");
-				locquery = $("#l").attr("value");
+				//locquery = $("#l").attr("value");
 
 				// Creates variables that are a combination of site url and user input
 				urlnytimes = NYTIMES_URL + query;
 				urlnymag = NYMAG_URL + query;
-				urlyelp = YELP_URL + query + locyelp + locquery;
+				urlyelp = YELP_URL + query + locyelp //+ locquery;
 				//urlnewyorker = NEWYORKER_URL + query + tables;
 
 				//Opens the new URLS in new windows/tabs
@@ -45,86 +44,71 @@
 				window.open (urlnytimes);
 				//window.open (urlnewyorker);
 				window.yelpwindow = window.open (urlyelp);
-									/*yelpwindow.onload =
-									setTimeout (function () {
-									alert('yay');
-									yelpfirstlink = window.yelpwindow.document.getElementbyid('bizTitleLink0');
-									alert(yelpfirstlink.href);
-					}, 10000)*/
 
 				return false;
 			})
 		})
 </script>
-<style type="text/css">
-body
-{
-	background-color:#FF9966;
-}
 
-h1 {
-	color:#666666;
-	text-align:center;
-	font-size:42px;
-	position:relative;
-	top:30px;
-	}
-form {
-	color:#666666;
-	display:block;
-	width:350px;
-	margin:auto;
-	position:relative;
-	top:50px;
-	font-size:20px;
-	}
-label {
-	display:block;
-	float:left;
-	width:175px;
-	text-align:right;
-	margin-right:10px;
-	;
-}
-.button
-{
-	color: #666666;
-	font-size:16px;
-	margin-left: 185px;
-	background:#FFCC99;
-	border: 2px solid #ffb777;
-}
+<script type='text/javascript'>
+    // Parses returned response and extracts
+    // the title, links, and text of each news story.
+    function nymag_news(o){
+      var items = o.query.results.item;
+      var nymagoutput = '';
+      var no_items=items.length;
+      for(var i=0;i<no_items;i++){
+        var title = items[i].title;
+        var link = items[i].link;
+        var desc = items[i].description;
+		var pubDate = items[i].pubDate;
+		var pubDaten= pubDate.substring(0,17);
+        nymagoutput += "<div class='item'>"+ "<a class='item' href='" + link + "' target='_blank'>"+title+"</a>" + "<br/>" + "<span class='date'>" + pubDaten + "</span>"+ "<br/>" + desc + "<br/>" +"<br/>" +"<br/>" + "</div>";
+      }
+      // Place news stories in div tag
+      document.getElementById('nymagresults').innerHTML = nymagoutput;
+    }
 
+	function nytimes_news(o){
+      var items = o.query.results.item;
+      var nytimesoutput = '';
+      var no_items=items.length;
+      for(var i=0;i<no_items;i++){
+        var title = items[i].title;
+		var link = items[i].link;
+        var desc = items[i].description;
+		var pubDate = items[i].pubDate;
+		var pubDaten= pubDate.substring(0,17);
+        nytimesoutput += "<div class='item' id='nytimes'>" + "<a class='item' href='" + link + "' target='_blank'>"+title+"</a>" + "<br />" + "<span class='date'>" +pubDaten + "</span>" + "<br />" + desc + "<br/>"+ "<br/>"+ "<br/>"+ "</div>";
+      }
+      // Place news stories in div tag
+      document.getElementById('nytimesresults').innerHTML = nytimesoutput;
+    }
 
-body.sansserif{font-family:"Myriad Pro",sans-serif;}
-body.center{text-align:center}
-div
-{
-	width:100%;
-	height:200px;
-	background-color:#666666;
-	position:absolute;
-	left:0;
-	bottom:0px;
-	line-height:200%;
-	text-align:center;
-	vertical-align:top;
-	color:white;
-	font-family:"Myriad Pro",sans-serif;
-	/* Firefox*/
-	display:-moz-box;
-	-moz-box-orient:horizontal;
-	-moz-box-pack:center;
-	-moz-box-align:center;
+	function eater_news(o){
+      var items = o.query.results.entry;
+      var eateroutput = '';
+      var no_items=items.length;
+      for(var i=0;i<no_items;i++){
+        var title = items[i].title;
+        var link = items[i].link.href;
+        var desc = items[i].summary;
+        var pubDate = items[i].published;
+        var pubDaten = pubDate.substring(0,10);
+        var content = items[i].content.content;
+        var contentn = content.substring(0,150);
+        //this works but os just set up to cancel itself out now
+        /*var contentstr=JSON.stringify(content, function (key, value){
+        	if (typeof value=="string")
+        	return null
+        });*/
+        eateroutput += "<div class='item'>" + "<a class='item' href='" + link + "' target='_blank'>"+title+"</a>" + "<br/> " + "<span class='date'>" + pubDaten + "</span>" +"<br />" + content +  "<br/>"+ "<br/>"+ "<br/>"+"</div>";
+      }
+      // Place news stories in div tag
+      document.getElementById('eaterresults').innerHTML = eateroutput;
+    }
+    </script>
 
-	/*Safari and Chrome */
-	display:-webkit-box;
-	-webkit-box-orient:horizontal;
-	-webkit-box-pack:center;
-	-webkit-box-align:center;
-
-}
-</style>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -139,26 +123,60 @@ div
 
 </script>
 </head>
-<body class="sansserif">
-	<h1> Well Read, Well Fed</h1>
-		<form action="" method="get" accept-charset="utf-8">
+<body>
 
-		<p><label for="q">Restaurant Name </label>
-			<input type="text" name="q" value="" id="q">
-		</p>
-		<p><label for="l">Location</label>
-			<input type="text" name="l" value="" id="l">
-		</p>
-		<p>
-		<input type="submit" class="button" id="submit" value="Find Reviews!">
-		</p>
-
-		</form>
-	<div>
-	<span style="font-size:28px">	Beta </span> <br />
-		Serving up a daily feast of reviews <br />
-		(only in Manhattan, for now)
+<div class="navbar">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+		<span class="brand">
+		 WRWF
 		</span>
+		</div>
 	</div>
+</div>
+
+<div class="intro">
+<div class="intro-inner">
+<div class="container-fluid">
+	<div class="span12">
+	<div class="search">
+		<h1>Well Read, Well Fed </h1>
+		<h2>Serving up a daily feast of reviews </h2>
+		<h3>(only in Manhattan, for now)</h3>
+		<form action="" method="get" accept-charset="utf-8">
+		<input type="text" name="q" value=""  placeholder="restaurant name" id="q">
+		</br>
+		<input type="submit" class="btn" id="submit" value="Find Reviews!">
+		</form>
+	</div>
+	</div>
+</div>
+</div>
+</div>
+</div>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12"> <h2> Recent Restaurant News & Reviews </h2></div>
+	</div>
+	<div class="row-fluid">
+		<div class='span4'>
+			<h3> New York Magazine </h3>
+		</div>
+		<div class='span4'> <h3>New York Times</h3></div>
+		<div class='span4'> <h3>Eater NY</h3></div>
+	</div>
+
+	<div class="row-fluid">
+		<div class='span4' id='nymagresults'></div>
+		<div class='span4' id='nytimesresults'></div>
+		<div class='span4' id='eaterresults'></div>
+	</div>
+</div>
+
+
+<script src='http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22http%3A%2F%2Fnymag.com%2Frss%2FRestaurant_Review.xml%22&format=json&diagnostics=true&callback=nymag_news'></script>
+<script src='http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22http%3A%2F%2Ftopics.nytimes.com%2Ftopics%2Freference%2Ftimestopics%2Fsubjects%2Fr%2Frestaurants%2Findex.html%3Frss%3D1%22&format=json&diagnostics=true&callback=nytimes_news'></script>
+<script src='http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20atom%20where%20url%3D%22http%3A%2F%2Ffeeds.feedburner.com%2Feater%2Fnyc%22&format=json&diagnostics=true&callback=eater_news'></script>
+
 </body>
 </html>
