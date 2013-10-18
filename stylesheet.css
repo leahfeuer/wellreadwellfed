@@ -353,6 +353,16 @@ a.item{
 		height: auto;
 	}
 
+div.wide div.entry-image{ 
+   max-width: 100%;
+    height: auto;
+  }
+
+  img[src*="nymag"].mt-image-center,  img[src*="nymag"].image { 
+   max-width: 100%;
+    height: auto;
+  }
+
 	img[src*="eater"]{
 		max-width: 100%;
 		height: auto;
