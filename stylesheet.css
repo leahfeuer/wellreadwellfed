@@ -347,7 +347,7 @@ a.item{
 	height:150px; 
 }
 
-	 img[src*="images.nymag"]
+	 img[src*="nymag"]
 	{
 		width: 100%;
 		height: auto;
